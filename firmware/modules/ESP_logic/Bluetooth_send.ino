@@ -18,6 +18,10 @@ void BLE_send(ProjectState state) {
                 delay(100);
                 bleKeyboard.releaseAll();
                 break;
+            case STATE_RIGHT:
+                Serial.println("\nSending Right Arrow...");  
+                bleKeyboard.write(KEY_RIGHT_ARROW);
+                break;
         }
     }
 }

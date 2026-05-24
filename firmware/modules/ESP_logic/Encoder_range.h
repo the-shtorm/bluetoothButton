@@ -4,7 +4,8 @@
 enum ProjectState {
   STATE_FLASH,
   STATE_KING,
-  STATE_SANJI
+  STATE_SANJI,
+  STATE_RIGHT
 };
 
 
