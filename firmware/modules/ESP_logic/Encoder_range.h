@@ -8,6 +8,18 @@ enum ProjectState {
   STATE_RIGHT
 };
 
+inline const char* ToString(ProjectState state) {
+    switch(state) {
+        case STATE_FLASH:
+            return "FLASH";
+        case STATE_KING:
+            return "KING";
+        case STATE_SANJI:
+            return "SANJI";
+        case STATE_RIGHT:
+            return "RIGHT";        
+    }
+}
 
 template <typename T>
 class Range {
