@@ -37,9 +37,17 @@ void setup() {
     Serial.println("Started");
 
     /* --DISPLAY SETTNGS-- */
-    display.begin(SSD1306_SWITCHCAPVCC, 0x3C);
     Wire.setClock(400000);
-    display.setTextColor(SSD1306_WHITE);
+    display.begin(SSD1306_SWITCHCAPVCC, 0x3C);
+    display.ssd1306_command(SSD1306_SETCONTRAST);
+    display.ssd1306_command(0x00);
+
+    display.ssd1306_command(SSD1306_SETPRECHARGE);
+    display.ssd1306_command(0x11);
+
+    display.ssd1306_command(SSD1306_SETVCOMDETECT);
+    display.ssd1306_command(0x00);
+
     display.clearDisplay();
     display.setTextSize(2);
     draw_centered_text("loading", 0, 0, 128, 32);
