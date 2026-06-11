@@ -1,4 +1,5 @@
 #include <GyverButton.h>
+#include <EncButton.h>
 #include <BleKeyboard.h>
 #include <Encoder_range.h>
 #include <Wire.h>
@@ -13,7 +14,7 @@
 
 
 // LOGGING TIMER VARIABLES
-#define EXE_INTERVAL 500
+#define EXE_INTERVAL 100
 unsigned long lastExecutedMillis = 0;
 
 
@@ -37,6 +38,7 @@ void setup() {
 
     /* --DISPLAY SETTNGS-- */
     display.begin(SSD1306_SWITCHCAPVCC, 0x3C);
+    Wire.setClock(400000);
     display.setTextColor(SSD1306_WHITE);
     display.clearDisplay();
     display.setTextSize(2);
@@ -64,12 +66,6 @@ void loop() {
 
     if (click) systemState.setClick(click);
 
-    if (currentMillis - lastExecutedMillis >= EXE_INTERVAL) {
-        lastExecutedMillis = currentMillis;
-        systemState.setClick(click);
-        Serial.print(".");
-    }
-
     btn.tick();
     clkTrack.tick();
     systemState.setBluetooth(bleKeyboard.isConnected());
@@ -89,5 +85,10 @@ void loop() {
         if (click) Serial.println("No device is connected");
     }
 
-    draw_screen();
+    if (currentMillis - lastExecutedMillis >= EXE_INTERVAL) {
+        lastExecutedMillis = currentMillis;
+        draw_screen();
+        systemState.setClick(click);
+    }
+
 } 
